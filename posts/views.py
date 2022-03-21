@@ -67,22 +67,6 @@ def deletePost(request, pk):
         return redirect('/youser/')
     context = {'item': Posts, 'pk': pk, 'type': 'gad'}
     return render(request, 'delete.html', context)
-#
-
-# @login_required(login_url='/login')
-# def deleteMember(request, pk):
-#     Search = Member.objects.get(id=pk)
-#     if request.method == "POST":
-#         Search.delete()
-#         return redirect('details', pk=Search.retaled_to_id)
-#     context = {'item': Search, 'pk': pk, 'type': 'mem'}
-#     return render(request, 'delete.html', context)
-
-
-# @login_required(login_url='/login')
-# def about(request):
-#     userget = request.user.username
-#     return render(request, 'about.html', {'user': userget})
 
 
 def logout(request):

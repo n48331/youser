@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'materializecssform',
     'posts',
+    'chat',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,5 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

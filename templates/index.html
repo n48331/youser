@@ -58,9 +58,9 @@
             </a>
           </li>
           <li class="list" data-color="#3c40c6">
-            <a href="about">
-              <span class="icon"><i class="far fa-info"></i></span>
-              <span class="title">About</span>
+            <a href="chat">
+              <span class="icon"><i class="far fa-user"></i></span>
+              <span class="title">Chat</span>
             </a>
           </li>
 
@@ -162,23 +162,21 @@
               color = "#FEFFFF";
               id = character.id;
             }
-            console.log("{{userId}}" == character.created_by_id);
+
             const creator =
               "{{userId}}" == character.created_by_id
                 ? "YOU"
                 : character.created_by_name;
-            console.log(creator);
+            console.log(character.verified);
 
             return `
-               <li style="background-color: ${color}; border-radius: 20px; box-shadow: 0 0 60px rgba(0, 0, 0, 0.548);" class="character" onclick = "location.href = {{userId}}== ${character.created_by_id}?'post/update-post/${id}':'chat/${character.created_by_id}';">
+               <li style="background-color: ${color}; border-radius: 20px; box-shadow: 0 0 60px rgba(0, 0, 0, 0.548);" class="character" onclick = "location.href = {{userId}}== ${character.created_by_id}?'post/update-post/${id}':'chat/home/?u=${character.created_by_id}';">
                     <h5 style="font-size:150%;">${character.title}</h5>
                     <span>[${character.type}] </span>
                     <p> ${character.desc}</p>
-                    created by : ${creator}( 
-                    ${character.location_city})
-                    ${character.verified})
-                    <i style="color: green;" class="far fa-user-check"></i>
-                    <i style="color: red;" class="far fa-user"></i>
+                    created by : <strong>${creator}(${character.location_city})</strong>
+                   <!--  <i style="color: green;" class="far fa-user-check"></i>
+                    <i style="color: red;" class="far fa-user"></i>-->
                     <img src="../media/${character.image}"></img>
                 </li>
             `;
