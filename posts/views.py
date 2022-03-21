@@ -67,7 +67,7 @@ def deletePost(request, pk):
         return redirect('/youser/')
     context = {'item': Posts, 'pk': pk, 'type': 'gad'}
     return render(request, 'delete.html', context)
-
+#
 
 # @login_required(login_url='/login')
 # def deleteMember(request, pk):
