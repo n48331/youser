@@ -1,0 +1,103 @@
+{% extends "base.html" %} {% load crispy_forms_tags %} {% load materializecss %}
+{% load static %} {% block css %}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="{% static 'images/Earth2.jpg' %}" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet"
+/>
+
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+  crossorigin="anonymous"
+/>
+<link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}" />
+{% endblock css %} {% block title %} {% endblock title %} {% block content %}
+
+<div class="container">
+  <div class="content-section">
+    <div>
+      {% for message in messages %}
+      <h3>{{message}}</h3>
+      {% endfor %}
+    </div>
+    <div class="media">
+      <img
+        class="rounded-circle account-img"
+        src="{{ user.profile.image.url }}"
+      />
+      <div class="media-body">
+        <h2 class="account-heading">{{ user.username }}</h2>
+        <p class="text-secondary">{{ user.email }}</p>
+      </div>
+    </div>
+    <form
+      method="POST"
+      enctype="multipart/form-data"
+      id="profileForm"
+      data-states-url="{% url 'ajax_load_cities' %}"
+    >
+      {% csrf_token %}
+
+      <table>
+        {{ u_form.as_table }} {{ p_form.as_table }}
+      </table>
+      <!-- <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Profile Info</legend>
+        {{ u_form|crispy }}
+         {{ p_form|materializecss }}
+      </fieldset> -->
+      <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Update</button>
+        <a href="{% url 'logout' %}"
+          ><span
+            style="background-color: coral; color: black"
+            class="btn btn-outline-info"
+            type="submit"
+            >Log Out</span
+          ></a
+        >
+        <a href="{% url 'index' %}"
+          ><span
+            style="background-color: coral; color: black"
+            class="btn btn-outline-info"
+            type="submit"
+            >Home</span
+          ></a
+        >
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock content %} {% block scripts %}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  $("#id_state").change(function () {
+    const url = $("#profileForm").attr("data-states-url"); // get the url of the `load_cities` view
+    const stateId = $(this).val(); // get the selected state ID from the HTML input
+
+    $.ajax({
+      // initialize an AJAX request
+      url: url, // set the url of the request (= /persons/ajax/load-cities/ )
+      data: {
+        state_id: stateId, // add the state id to the GET parameters
+      },
+      success: function (data) {
+        // `data` is the return of the `load_cities` view function
+        //$("#id_city").html(data); // replace the contents of the city input with the data that came from the server
+
+        let html_data = '<option value="">---------</option>';
+        data.forEach(function (city) {
+          console.log(city);
+          html_data += `<option value="${city.id}">${city.name}</option>`;
+        });
+        $("#id_city").html(html_data);
+      },
+    });
+  });
+</script>
+4 {% endblock scripts %}
