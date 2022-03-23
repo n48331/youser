@@ -1,3 +1,4 @@
+import profile
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
@@ -8,7 +9,7 @@ from django.contrib.auth.models import User as UserModel
 from django.db.models import Q
 import json
 from accounts.models import Profile, City
-from . forms import UserUpdateSelection
+from .filters import UserFilter
 # Create your views here.
 
 
@@ -52,22 +53,38 @@ from . forms import UserUpdateSelection
 #           'GET' and 'u' in request.GET else 0)
 #     return render(request, "chat_home.html", context)
 
+def search(request):
+    User = get_user_model()
+    user_list = User.objects.all()
+    user_filter = UserFilter(request.GET, queryset=user_list)
+    return render(request, 'user_list.html', {'filter': user_filter})
+
 
 @login_required
 def home(request):
     User = get_user_model()
-    users = User.objects.all()
     city_list = City.objects.all()
     chats = {}
+    city = request.GET.get("city")
+    selected_city = request.user.profile.filter_city_id
+    if city is not None:
+        users = User.objects.filter(profile__city=city)
+        Profile.objects.filter(filter_city_id=request.user.profile.filter_city_id).update(
+            filter_city_id=city)
+    else:
+        users = User.objects.filter(profile__city=selected_city)
 
+    user_filter = UserFilter(request.GET, queryset=users)
+    print(city)
     if request.method == 'GET' and 'u' in request.GET:
         # chats = chatMessages.objects.filter(Q(user_from=request.user.id & user_to=request.GET['u']) | Q(user_from=request.GET['u'] & user_to=request.user.id))
         chats = chatMessages.objects.filter(Q(user_from=request.user.id, user_to=request.GET['u']) | Q(
             user_from=request.GET['u'], user_to=request.user.id))
         chats = chats.order_by('date_created')
     context = {
+        "selected_city": selected_city,
         "cities": city_list,
-
+        'filter': user_filter,
         "page": "home",
         "users": users,
         "chats": chats,

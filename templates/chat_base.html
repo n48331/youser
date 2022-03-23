@@ -58,14 +58,16 @@
               ><i class="fa fa-sign-out-alt"></i> Logout</a
             >
           </li>
-          <!-- <form action="" method="post">
+          <form action="">
             {% csrf_token %}
             <select name="city" id="">
-              <option value="" disabled selected hidden>Now selected</option>
+              <option value="" disabled selected hidden>
+                Now selected {{user.profile.filter_city_id}}
+              </option>
               {% for city in cities %}
               <option value="{{city.id}}">{{city}}</option>
               {% endfor %}
-            </select> -->
+            </select>
 
             <input type="submit" value="Search" />
           </form>
