@@ -1,22 +1,22 @@
+from django.shortcuts import render, redirect
 
-from django.shortcuts import render, redirect, HttpResponse
 from json import dumps
 from django.contrib.auth.models import auth
 from django.contrib.auth.decorators import login_required
-import folium
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 
 from .models import *
-from .forms import PostForm, ModelForm
+from .forms import PostForm
+import django_filters
 # Create your views here.
 
 
 @login_required(login_url='/login')
 def index(request):
     user_data = list(User.objects.values())
-    post_data = list(Post.objects.values())
+    post_data = Post.objects.filter(
+        location_city=request.user.profile.city)
+    post_data = list(post_data.values())
     post_dataJSON = dumps(post_data)
     userId = request.user.id
 

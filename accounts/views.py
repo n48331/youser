@@ -5,8 +5,6 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 # Create your views here.
 
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from .forms import SignUpForm, UserUpdateForm, ProfileUpdateForm
 from .models import Profile, City

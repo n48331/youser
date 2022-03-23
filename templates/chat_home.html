@@ -36,7 +36,10 @@
               href="{% url 'chat-home' %}?u={{u.id}}"
             >
               <div>
-                <p>{{u.first_name}} {{u.last_name}} ({{u.username}})</p>
+                <p>
+                  {{u.user.first_name}} {{u.user.last_name}} ({{u.city}})
+                  now:{{selected_city}}
+                </p>
               </div>
             </a>
             {% endif %} {% endfor %}

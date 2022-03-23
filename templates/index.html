@@ -96,14 +96,14 @@
         <span>r</span>
       </div>
 
-      <div id="searchWrapper">
+      <!-- <div id="searchWrapper">
         <input
           type="text"
           name="searchBar"
           id="searchBar"
           placeholder="  search for a name or house"
         />
-      </div>
+      </div> -->
       <br />
 
       <ul id="charactersList"></ul>
@@ -125,10 +125,10 @@
 
     <script>
       const charactersList = document.getElementById("charactersList");
-      const searchBar = document.getElementById("searchBar");
+      //const searchBar = document.getElementById("searchBar");
       let hpCharacters = [];
 
-      searchBar.addEventListener("keyup", (e) => {
+      /* searchBar.addEventListener("keyup", (e) => {
         const searchString = e.target.value.toLowerCase();
 
         const filteredCharacters = hpCharacters.filter((character) => {
@@ -138,7 +138,7 @@
           );
         });
         displayCharacters(filteredCharacters);
-      });
+      });*/
 
       const loadCharacters = async () => {
         try {
@@ -156,10 +156,10 @@
         const htmlString = characters
           .map((character) => {
             if (character.type == "ad") {
-              color = "#BFFFFF";
+              color = "#d8dddd";
               id = character.id;
             } else {
-              color = "#FEFFFF";
+              color = "#d8dddd";
               id = character.id;
             }
 
@@ -170,13 +170,26 @@
             console.log(character.verified);
 
             return `
-               <li style="background-color: ${color}; border-radius: 20px; box-shadow: 0 0 60px rgba(0, 0, 0, 0.548);" class="character" onclick = "location.href = {{userId}}== ${character.created_by_id}?'post/update-post/${id}':'chat/home/?u=${character.created_by_id}';">
+            <!-- <ul class="SG">
+              <li class="sgLi">
+                <div class="box">
+                <h3>Style disc</h3>
+                <ul class="df">
+                <li>Friday</li>
+                <li>Monday</li>
+                <li>Saturday</li>
+                <li>Wednesday</li>
+                </ul> 
+              </div>
+             </li> </ul>-->
+              <li style="
+              background-color: ${color};
+              " class="character" onclick = "location.href = {{userId}}== ${character.created_by_id}?'post/update-post/${id}':'chat/home/?u=${character.created_by_id}';">
                     <h5 style="font-size:150%;">${character.title}</h5>
                     <span>[${character.type}] </span>
                     <p> ${character.desc}</p>
                     created by : <strong>${creator}(${character.location_city})</strong>
-                   <!--  <i style="color: green;" class="far fa-user-check"></i>
-                    <i style="color: red;" class="far fa-user"></i>-->
+                   
                     <img src="../media/${character.image}"></img>
                 </li>
             `;

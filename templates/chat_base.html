@@ -63,6 +63,20 @@
               ><i class="fa fa-sign-out-alt"></i> Logout</a
             >
           </li>
+          <li class="nav-item">
+           <form action="" method="post">
+             {% csrf_token %}
+              <select name="city" id="">
+                <option value="{{default_city.id}}">your location {{default_city}}</option>
+                {% for city in cities %}
+                <option value={{city.id}}>{{city}}</option>
+                {% endfor %}
+              
+              </select>
+              Current location : {{selected_city}}
+          <input type="submit" value="Search"/>
+        </form>
+          </li>
         </ul>
         {% if user.is_authenticated %}
         <span

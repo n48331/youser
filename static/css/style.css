@@ -2,7 +2,7 @@ body,html {
     font-family: "Archivo Black", sans-serif;
     /* background-color: #10f5c3; */
     margin: 0;
-    background-color: #3AAFA9;
+    background-color: #d8dddd;
 
     /* Animation */
 
@@ -14,7 +14,7 @@ body,html {
 /* Animation Manopo */
 
 .words {
-    color: #3AAFA9;
+    color: #d8dddd;
     text-align: center;
     font-size: 0;
     line-height: 1.5;
@@ -91,7 +91,7 @@ body,html {
 
 .character {
     list-style-type: none;
-    background-color: #eaeaea;
+    background: #d8dddd;
     border-radius: 3px;
     padding: 10px 20px;
     display: grid;
@@ -100,8 +100,15 @@ body,html {
         'name image'
         'house image';
     text-align: left;
-}
+    box-shadow: 0 2px 4px rgba(0,0,0, .2);
+    box-sizing: border-box;
+    width: 100%;
+    height: 50vh;
 
+}
+.character:hover{
+  box-shadow:0 5px 10px rgba(0,0,0,.15);
+}
 .character > h2 {
     grid-area: name;
     margin-bottom: 0px;
@@ -155,3 +162,48 @@ body,html {
 
     box-shadow: 0 0 60px rgba(0, 0, 0, 0.548);
 } */
+
+
+li{
+  color: #2c3e50;
+  font-size: 18px;
+  line-height: 30px;
+  text-align: justify;
+  letter-spacing: 1px;
+  font-family: 'Raleway', serif;
+}
+/*SG = style grid*/
+.SG{
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.SG .sgLi{
+  min-width: 24%;
+  margin: 2% .35%;
+  display: inline-flex;
+  box-shadow: 0 2px 4px rgba(0,0,0, .2);
+}
+.SG .sgLi:hover{
+  box-shadow:0 5px 10px rgba(0,0,0,.15);}
+.SG .box{
+  width: 100%;
+  height: 100vh;
+  padding: 1% 2%;
+  background: #fff;
+  min-height: 200px;
+  max-height: 220px;
+  box-sizing: border-box;
+}
+.s19{list-style: none;}
+.s19 li:before{
+  content: '\f0a9';
+  margin-right: 15px;
+  font-family: FontAwesome;
+}
+
+@media (max-width: 970px){
+  .SG .sgLi{width: 180px;}}
+@media (max-width: 425px){
+  .SG .sgLi{width: 100%;}
+}

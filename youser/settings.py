@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django_filters',
+    'bootstrapform',
     'accounts',
     'crispy_forms',
     'materializecssform',
@@ -82,7 +85,7 @@ WSGI_APPLICATION = 'youser.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'youser001',
+        'NAME': 'youser002',
         'USER': 'postgres',
         'PASSWORD': '1234',
         'HOST': 'localhost'
@@ -122,7 +125,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+AUTH_PROFILE_MODULE = 'accounts.Profile'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 

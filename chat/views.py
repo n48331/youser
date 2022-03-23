@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -7,20 +7,38 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User as UserModel
 from django.db.models import Q
 import json
-
+from accounts.models import Profile, City
+from . forms import UserUpdateSelection
 # Create your views here.
 
 
 @login_required
 def home(request):
-    User = get_user_model()
-    users = User.objects.all()
+
+    current_city = ''
+    # current_city = Profile.objects.filter(city=request.user.profile.city)
+    users = Profile.objects.all()
+    # users = Profile.objects.filter(city=request.user.profile.city)
+    city_list = City.objects.all()
+    default_city = request.user.profile.city
+    if request.method == 'POST':
+        city = request.POST.get("city")
+        users = Profile.objects.filter(city=city)
+        current_city = City.objects.get(id=city)
+        selected_city = Profile.objects.filter(filter_city=request.user.profile.filter_city).update(
+            filter_city=current_city.name)
+
     chats = {}
+    selected_city = request.user.profile.filter_city
     if request.method == 'GET' and 'u' in request.GET:
         chats = chatMessages.objects.filter(Q(user_from=request.user.id, user_to=request.GET['u']) | Q(
             user_from=request.GET['u'], user_to=request.user.id))
         chats = chats.order_by('date_created')
     context = {
+        "default_city": default_city,
+        "current_city": current_city,
+        "selected_city": selected_city,
+        "cities": city_list,
         "page": "home",
         "users": users,
         "chats": chats,

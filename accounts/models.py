@@ -27,6 +27,7 @@ class Profile(models.Model):
         State, on_delete=models.SET_NULL, null=True, blank=True)
     city = models.ForeignKey(
         City, on_delete=models.SET_NULL, null=True, blank=True)
+    filter_city = models.CharField(max_length=30, null=True, blank=True)
     verified = models.BooleanField(default=False, editable=True)
 
     def __str__(self):
