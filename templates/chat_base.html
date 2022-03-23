@@ -51,32 +51,24 @@
           <li class="nav-item {% if page == 'home' %} active {% endif %}">
             <a class="nav-link" href="{% url 'chat-home' %}"
               ><i class="fa fa-home"></i> Home</a
-              >
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'index' %}"
-                  ><i class="fa fa-card"></i> Events</a
-                >
-              </li>
+            >
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}"
               ><i class="fa fa-sign-out-alt"></i> Logout</a
             >
           </li>
-          <li class="nav-item">
-           <form action="" method="post">
-             {% csrf_token %}
-              <select name="city" id="">
-                <option value="{{default_city.id}}">your location {{default_city}}</option>
-                {% for city in cities %}
-                <option value={{city.id}}>{{city}}</option>
-                {% endfor %}
-              
-              </select>
-              Current location : {{selected_city}}
-          <input type="submit" value="Search"/>
-        </form>
-          </li>
+          <!-- <form action="" method="post">
+            {% csrf_token %}
+            <select name="city" id="">
+              <option value="" disabled selected hidden>Now selected</option>
+              {% for city in cities %}
+              <option value="{{city.id}}">{{city}}</option>
+              {% endfor %}
+            </select> -->
+
+            <input type="submit" value="Search" />
+          </form>
         </ul>
         {% if user.is_authenticated %}
         <span
@@ -96,3 +88,16 @@
   </script>
   {% block footer %}{% endblock footer %}
 </html>
+
+<!-- <form action="" method="post">
+             {% csrf_token %}
+              <select name="city" id="">
+                <option value="" disabled selected hidden >Now selected</option>
+                {% for city in cities %}
+                <option value={{city.id}}>{{city}}</option>
+                {% endfor %}
+              
+              </select>
+
+          <input type="submit" value="Search"/>
+        </form> -->

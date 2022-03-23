@@ -28,6 +28,8 @@ class Profile(models.Model):
     city = models.ForeignKey(
         City, on_delete=models.SET_NULL, null=True, blank=True)
     filter_city = models.CharField(max_length=30, null=True, blank=True)
+    filter_city_id = models.ForeignKey(
+        City, on_delete=models.SET_NULL, null=True, blank=True, related_name='current_city')
     verified = models.BooleanField(default=False, editable=True)
 
     def __str__(self):

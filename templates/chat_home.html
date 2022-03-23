@@ -30,15 +30,17 @@
       <div class="row h-100">
         <div class="col-md-4 border-right h-100">
           <div class="list-group bg-dark" id="user-list">
-            {% for u in users %} {% if not u.id == 1 and not u.id == user.id %}
+            {% for u in users %}
+            <!--  -->
+            {% if not u.user.id == 1 and not u.user.id == user.id %}
             <a
               class="list-group-item {% if u.id != chat_id %}bg-dark{% else %}bg-primary{% endif %} text-white"
               href="{% url 'chat-home' %}?u={{u.id}}"
             >
               <div>
                 <p>
-                  {{u.user.first_name}} {{u.user.last_name}} ({{u.city}})
-                  now:{{selected_city}}
+                  {{u.first_name}} {{u.last_name}} ID:({{u.id}})
+                  [{{u.profile.city}}]
                 </p>
               </div>
             </a>
