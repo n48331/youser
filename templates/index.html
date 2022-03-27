@@ -9,7 +9,14 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" type="text/css" href="{% static 'css\index.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css\navbar.css' %}" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link
+  rel="stylesheet"
+  href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+  integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+  crossorigin="anonymous"
+/>
+    
     {% endblock css %}
     <!--  -->
     {% block content %}
@@ -47,7 +54,7 @@
              
             </li>
             <li>
-              <a href="{% url 'profile' %}">{{user.get_full_name}}</a>
+              <a href="{% url 'profile' %}"><i class="fa fa-user"></i>&nbsp;&nbsp;{{user.get_full_name}}</a>
             </li>
           </ul>
         </nav>
@@ -103,6 +110,16 @@
 
 
       </div>
+      <footer style="position: relative; bottom: 0; width: 100%">
+        <!-- Copyright -->
+        <br /><br />
+        <div>
+          © 2022 Copyright:
+           Youser
+        </div>
+        <div>Current User : {{user}}</div>
+        <!-- Copyright -->
+      </footer>
 {% endblock content %}
 {% block script %}
 <!-- <script src="{% static 'js/script.js' %}"></script> -->

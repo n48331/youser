@@ -1,8 +1,17 @@
+
+from random import choices
 from .models import Post
-from django.forms import ModelForm
+from django import forms
 
 
-class PostForm(ModelForm):
+class PostForm(forms.ModelForm):
+    POST_TYPE = (
+        ('ad', 'Advertisment'),
+        ('event', 'Event'),
+    )
+    type = forms.ChoiceField(
+        choices=POST_TYPE, widget=forms.RadioSelect)
+
     class Meta:
         model = Post
         fields = ['title', 'image', 'type', 'desc']

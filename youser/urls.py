@@ -6,10 +6,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
 
-    path('', include('accounts.urls')),
+    path('', include('posts.urls')),
+    path('account/', include('accounts.urls')),
     path('admin/', admin.site.urls),
-    path('youser/', include('posts.urls')),
-    path('youser/chat/', include('chat.urls')),
+    path('chat/', include('chat.urls')),
 
 ]
 

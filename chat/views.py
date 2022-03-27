@@ -52,7 +52,7 @@ def home(request):
     }
     print(request.GET['u'] if request.method ==
           'GET' and 'u' in request.GET else 0)
-    return render(request, "chat.html", context)
+    return render(request, "chat_home.html", context)
 
 
 def get_messages(request):

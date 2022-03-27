@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:300, 400, 500"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <link
+      rel="stylesheet"
+      id="xo-google-fonts-css"
+      href="http://fonts.googleapis.com/css?family=Montserrat%3A400italic%2C400#038;ver=cc0ca1022224db4641d9750cd65dfefc"
+      type="text/css"
+      media="all"
+    />
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="main.js"></script>
+    <div class="container" id="container">
+      <div class="container-2">
+        <div class="wrapper-login" id="myDIV">
+          <div class="form-container sign-in-container">
+            <form action="#">
+              <div>
+                
+                <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                <lottie-player
+                  src="https://assets8.lottiefiles.com/packages/lf20_2nfmti0q.json"
+                  background="transparent"
+                  speed="1"
+                  style="width: 120px; height: 120px"
+                  loop
+                  autoplay
+                ></lottie-player>
+              </div>
+
+              <h1>Log in</h1>
+              <br />
+
+              <input type="email" placeholder="Email" />
+              <!-- <input type="password" placeholder="Password" /> -->
+
+              <div class="Icon-inside">
+                <input type="password" placeholder="Password" value="" id="myInput" />
+               <i class="uil uil-eye" onclick="myFunction3()"></i>
+              </div>
+              <a href="#">Forgot your password?</a>
+
+              <button>Log In</button>
+            </form>
+          </div>
+        </div>
+        <div class="wrapper-signIn" id="myDIV1">
+          <div class="form-container sign-in-container">
+            <form action="#">
+              <h1>Create Account</h1>
+              <br />
+
+              <input type="text" placeholder="Name" />
+              <input type="email" placeholder="Email" />
+              <div class="Icon-inside">
+                <input type="password" placeholder="Password" value="" id="pwd1" />
+               <i class="uil uil-eye" onclick="myFunction4()"></i>
+              </div>
+                <input type="password" placeholder="Password" value="" id="pwd2" />
+               
+              
+
+              <button>Sign Up</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="overlay-container">
+        <div class="overlay">
+          <div class="" container-3>
+            <div class="right-sign" id="r1">
+              <div class="overlay-panel overlay-right">
+                <h1>Hello, Friend!</h1>
+                <p>Enter your personal details and start journey with us</p>
+                <button class="ghost" onclick="myFunction1()">Sign Up</button>
+                <div class="logo">
+                  <a href="page.html"
+                    ><img src="youser.png" alt="youser" width="128px"
+                  /></a>
+                </div>
+              </div>
+            </div>
+            <div class="right-log" id="r2">
+              <div class="overlay-panel overlay-right">
+                <h1>Welcome Back!</h1>
+                <p>
+                  To keep connected with us please login with your personal info
+                </p>
+                <button class="ghost" onclick="myFunction2()">login</button>
+                <div class="logo">
+                  <a href="page.html"
+                    ><img src="youser.png" alt="youser" width="128px"
+                  /></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer></footer>
+  </body>
+</html>

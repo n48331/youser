@@ -21,7 +21,7 @@ def login(request):
             userget = request.user.username
             auth.login(request, user)
             if request.user.profile.city is not None:
-                return redirect("youser/")
+                return redirect("/")
             else:
                 messages.info(request, 'Please Update your location')
                 return redirect("profile")

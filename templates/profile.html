@@ -11,6 +11,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="{% static 'css/profile.css' %}" />
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
 <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -23,24 +24,57 @@
 {% endblock css %}
 <!--  -->
 {% block content %}
+<section class="navigation sticky">
+  <div class="nav-container">
+    <div class="brand">
+      <img src="{% static 'images\logo2.png' %}" width="15%" />
+    </div>
+    <nav>
+      <div class="nav-mobile">
+        <a id="nav-toggle" href="#!"><span></span></a>
+      </div>
+      <ul class="nav-list">
+        <li>
+          <a href="{% url 'index' %}">Home</a>
+        </li>
+        <li>
+          <a href="{% url 'chat-home' %}">Chat</a>
+        </li>
+
+        <li>
+          <a href="#">About</a>
+        </li>
+        <li>
+          <a href="{% url 'profile' %}">{{user.get_full_name}}</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</section>
 <div class="container" id="container">
   <div class="picture">
     <div class="dp-img">
-      <img src="{{ user.profile.image.url }}" />
+      <img class="profile" src="{{ user.profile.image.url }}" />
     </div>
-    <button class="ghost">UPLOAD NEW IMAGE</button>
-    {% render_field p_form.image type="file" class="ghost upload" %}
+    <div class="ghost" style="color: aliceblue">{{ user.get_full_name }}</div>
+
+    <div>
+      {% for message in messages %}
+      <div class="ghost" style="color: aliceblue">{{message}}</div>
+      {% endfor %}
+    </div>
   </div>
   <div class="info">
     <form
+      class="form2"
       method="POST"
       enctype="multipart/form-data"
       id="profileForm"
       data-states-url="{% url 'ajax_load_cities' %}"
     >
       {% csrf_token %}
-
       <!-- ============================= -->
+
       <div>
         <h2>USER NAME</h2>
         <div class="Icon-inside">
@@ -107,13 +141,20 @@
         </div>
         <hr />
       </div>
+      <div>
+        <h2>Image</h2>
+        <div class="Icon-inside">
+          <div class="upload">
+            {% render_field p_form.image type="file" class="upload"%}
+            <i class="uil uil-pen"></i>
+          </div>
+          <hr />
+        </div>
+      </div>
       <!-- ============================= -->
       <div class="info-btns">
         <button class="info-btn" type="submit">save</button>
-
-        <button class="info-btn" onclick="location.href='{% url 'logout' %}'">
-          log out
-        </button>
+        <a href="{% url 'logout' %}" class="info-a">Log out</a>
       </div>
     </form>
   </div>

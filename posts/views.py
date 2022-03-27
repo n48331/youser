@@ -7,10 +7,9 @@ from django.contrib import messages
 from .models import *
 from .forms import PostForm
 # Create your views here.
-from datetime import datetime
 
 
-@login_required(login_url='/login')
+@login_required(login_url='/account/')
 def index(request):
     # posts = Post.objects.all()
     posts = Post.objects.filter(
@@ -21,9 +20,9 @@ def index(request):
                    'posts': posts})
 
 
-@login_required(login_url='/login')
+@login_required(login_url='/account/')
 def CreatePost(request):
-    if request.user.profile.city is not None:
+    if request.user.profile.city is not None and request.user.last_name is not '':
         form = PostForm()
         if request.method == 'POST':
             form = PostForm(request.POST, request.FILES)
@@ -31,11 +30,11 @@ def CreatePost(request):
                 form.instance.created_by = request.user
                 form.instance.location_city = request.user.profile.city
                 form.save()
-                return redirect('/youser/')
+                return redirect('/')
         context = {'form': form, 'stat': 'Add Post'}
         return render(request, 'create.html', context)
     else:
-        messages.info(request, 'Please Update your location')
+        messages.info(request, 'Please Update your location or Name')
         return redirect("profile")
 
 
@@ -47,7 +46,7 @@ def updatePost(request, pk):
         form = PostForm(request.POST, request.FILES, instance=Posts)
         if form.is_valid():
             form.save()
-            return redirect('/youser/')
+            return redirect('/')
     context = {'form': form, 'pk': pk,
                'stat': 'Update or Delete', 'type': 'gad'}
     return render(request, 'update.html', context)
@@ -60,7 +59,7 @@ def deletePost(request, pk):
     if request.method == "POST":
 
         Posts.delete()
-        return redirect('/youser/')
+        return redirect('/')
     context = {'item': Posts, 'pk': pk, 'type': 'gad'}
     return render(request, 'delete.html', context)
 
