@@ -1,0 +1,155 @@
+body {
+
+  background:white;
+  
+}
+
+.card-container{
+  display: grid;
+  padding-top: 6.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+}
+
+.card {
+  max-width: 280px;
+  display: grid;
+  grid-template-rows: 14rem 14rem 1fr;
+  grid-template-areas:  
+  "image"
+  "text"
+  "created";
+  position:relative;
+  border-radius: 5px;
+  background :white;
+  box-shadow: 5px 5px 15px rgba(71, 71, 71, 0.418);
+  font-family: roboto;
+  text-align: center;
+  transition: 0.5s ease;
+  cursor: pointer;
+  margin:14px;
+}
+.card > .card-image {
+  grid-area: image;
+  max-height: 14rem;
+
+}
+
+.card > .card-text {
+  grid-area: text;
+  
+
+}
+.created {
+  grid-area: created;
+  
+}
+/* .card > .button {
+  grid-area: button;
+} */
+
+
+.card-image {
+  grid-area: image;
+  border-radius: 5px 5px 0 0;
+  background-size: cover;
+  align-items: center;
+} 
+
+.card-text {
+  grid-area: text;
+  color:#121212;
+  margin: 20px;
+  text-align: center;
+}
+.card-text .date {
+  color: rgb(255, 7, 110);
+  font-size:13px;
+}
+
+.card-text p {
+  color: rgb(0, 0, 0);
+  font-size:15px;
+  font-weight: 300;
+}
+.card-text h2 {
+  margin-top:0px;
+  margin-bottom: 0;
+  font-size:28px;
+}
+
+.card:hover {
+  transform: scale(1.15);
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+}
+
+
+.card .button{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+  margin-bottom: 33px;
+}
+
+.card .button button{
+  background:#612694;
+  outline: none;
+  border:1px solid #612694 ;
+  color: white;
+  padding: 8px 22px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition:transform 80ms ease-in;
+  cursor: pointer;
+}
+
+.card.button.button:focus{
+  outline: none;
+}
+.button button:hover{
+  background-color:black;
+  
+}
+
+/* Floating Button */
+.float{
+  position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:#612694;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+  z-index: 10;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+  
+  
+}
+.badge{
+  width: 4rem;
+  position: absolute;
+  left:0;
+  top: 15px;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 700;
+  background: #8135c4;
+  color: #ffffff;
+  padding: 3px 10px;
+  border-radius: 0 5px 5px 0;
+  box-shadow: 1px 1px 10px rgba(0,0,0,0.6);
+  font-family: Monaco, Monaco, monospace;
+}
+
+
+/* TEXT ANIMATION */
+
+
+
+

@@ -1,4 +1,4 @@
-import profile
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
@@ -12,46 +12,6 @@ from accounts.models import Profile, City
 from .filters import UserFilter
 # Create your views here.
 
-
-# @login_required
-# def home(request):
-
-#     current_city = ''
-#     # current_city = Profile.objects.filter(city=request.user.profile.city)
-#     users = Profile.objects.all()
-#     # users = Profile.objects.filter(city=request.user.profile.city)
-#     city_list = City.objects.all()
-#     # default_city = request.user.profile.city
-#     selected_city = request.user.profile.filter_city
-#     # if request.method == 'POST':
-#     #     city = request.POST.get("city")
-#     #     users = Profile.objects.filter(city=city)
-#     #     current_city = City.objects.get(id=city)
-#     #     city_form = UserUpdateSelection(
-#     #         request.POST, instance=request.user.profile.filter_city)
-#     #     if city_form.is_valid():
-#     #         city_form.save()
-
-#     # current_city = City.objects.get(id=city)
-
-#     chats = {}
-#     if request.method == 'GET' and 'u' in request.GET:
-#         chats = chatMessages.objects.filter(Q(user_from=request.user.id, user_to=request.GET['u']) | Q(
-#             user_from=request.GET['u'], user_to=request.user.id))
-#         chats = chats.order_by('date_created')
-#     context = {
-#         # "default_city": default_city,
-#         "current_city": current_city,
-#         "selected_city": selected_city,
-#         "cities": city_list,
-#         "page": "home",
-#         "users": users,
-#         "chats": chats,
-#         "chat_id": int(request.GET['u'] if request.method == 'GET' and 'u' in request.GET else 0)
-#     }
-#     print(request.GET['u'] if request.method ==
-#           'GET' and 'u' in request.GET else 0)
-#     return render(request, "chat_home.html", context)
 
 def search(request):
     User = get_user_model()
@@ -92,7 +52,7 @@ def home(request):
     }
     print(request.GET['u'] if request.method ==
           'GET' and 'u' in request.GET else 0)
-    return render(request, "chat_home.html", context)
+    return render(request, "chat.html", context)
 
 
 def get_messages(request):

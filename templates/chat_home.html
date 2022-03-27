@@ -32,7 +32,7 @@
           <div class="list-group bg-dark" id="user-list">
             {% for u in users %}
             <!--  -->
-            {% if not u.id == 1 and not u.id == user.id %}
+            {% if not u.id == user.id %}
             <a
               class="list-group-item {% if u.id != chat_id %}bg-dark{% else %}bg-primary{% endif %} text-white"
               href="{% url 'chat-home' %}?u={{u.id}}"

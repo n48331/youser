@@ -6,200 +6,130 @@
 <!--  -->
 {% block css %}
 
-<link rel="icon" href="{% static 'images\Earth2.jpg' %}" />
-<link rel="stylesheet" href="{% static 'css\style.css' %}" />
-<link
-  href="https://fonts.googleapis.com/icon?family=Material+Icons"
-  rel="stylesheet"
-/>
-
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/css/materialize.min.css"
-  integrity="sha256-qj3p6P1fJIV+Ndv7RW1ovZI2UhOuboj9GcODzcNFIN8="
-  crossorigin="anonymous"
-/>
-
-<link
-  rel="stylesheet"
-  href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-  integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-  crossorigin="anonymous"
-/>
-<link rel="stylesheet" href="{% static 'css/navbar.css' %}" />
-
-{% endblock css %}
-<!--  -->
-{% block content %}
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
-
-<html lang="en">
-  <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>MANOPO {% block title %} {% endblock title %}</title>
-  </head>
-  <body>
-    <div class="container">
-      <div class="navigation">
-        <ul>
-          <li class="list active" data-color="#dc143c">
-            <a href="#">
-              <span class="icon"><i class="far fa-home"></i></span>
-              <span class="title">Home</span>
-            </a>
-          </li>
-          <li class="list" data-color="#3c40c6">
-            <a href="post/addpost">
-              <span class="icon"><i class="far fa-plus"></i></span>
-              <span class="title">Add Post</span>
-            </a>
-          </li>
-          <li class="list" data-color="#3c40c6">
-            <a href="chat">
-              <span class="icon"><i class="far fa-user"></i></span>
-              <span class="title">Chat</span>
-            </a>
-          </li>
-
-          <li class="list" data-color="#ffa801">
-            <a href="../profile">
-              <span class="icon"><i class="far fa-address-card"></i></span>
-              <span class="title">Profile</span>
-            </a>
-          </li>
-          <div class="indicator"></div>
-        </ul>
+    <link rel="stylesheet" type="text/css" href="{% static 'css\index.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css\navbar.css' %}" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    {% endblock css %}
+    <!--  -->
+    {% block content %}
+    <a href="{% url 'addpost' %}" class="float">
+      <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+      <lottie-player
+        src="{% static 'json/add-post.json' %}"
+        background="transparent"
+        speed="1"
+        style="width: 60px; height: 60px"
+        loop
+        autoplay
+      ></lottie-player>
+      </a>
+    <!--card1-->
+    <section class="navigation  sticky">
+      <div class="nav-container">
+        <div class="brand">
+          <img src="{% static 'images\logo2.png' %}" width="15%" >
+        </div>
+        <nav>
+          <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
+          <ul class="nav-list">
+            <li>
+              <a href="#!">Home</a>
+            </li>
+            <li>
+              <a href="{% url 'chat-home' %}">Chat</a>
+              
+            </li>
+           
+            
+            <li>
+              <a href="#">About</a>
+             
+            </li>
+            <li>
+              <a href="{% url 'profile' %}">{{user.get_full_name}}</a>
+            </li>
+          </ul>
+        </nav>
       </div>
-      <script>
-        let list = document.querySelectorAll(".list");
-        for (let i = 0; i < list.length; i++) {
-          list[i].onmouseover = function () {
-            let j = 0;
-            while (j < list.length) {
-              list[j++].className = "list";
-            }
-            list[i].className = "list active";
-          };
-        }
-      </script>
-      <!-- <h1>MANOPO</h1> -->
+    </section>
+    <div class="card-container">
+    {% for post in posts %}
 
-      <div class="words word-1">
-        <span>Y</span>
-        <span>o</span>
-        <span>u</span>
-        <span>S</span>
-        <span>e</span>
-        <span>r</span>
+    <div class="card">
+     
+      <div class="card-image"
+      style="background: url('../media/{{post.image}}');"
+      ></div>
+      <div class="card-text">
+        
+        <h2>{{post.title}}</h2>
+        <span class="date">{{post.updated_at|date:"M d, Y" }}</span>
+
+          <div class="badge">
+            {{post.type}}
+            
+
+        </div>
+        <p>{{post.desc}}</p>
+       
+
+
+        </div>
+        <div class="created">
+          <span class="owner">
+            <b>
+            {{post.created_by.get_full_name}}
+          </b>
+          </span>
+          
+          <div class="button">
+            {% if userId == post.created_by.id %}
+            <button class="usercontact"onclick ="location.href = 'post/update-post/{{post.id}}';"> EDIT
+              
+              {% else %}
+              <button class="usercontact"onclick ="location.href = 'chat/home/?u={{post.created_by_id}}';"> CONTACT     
+                {% endif %}
+                
+              </button>
+            </div>
+          </div>
       </div>
 
-      <!-- <div id="searchWrapper">
-        <input
-          type="text"
-          name="searchBar"
-          id="searchBar"
-          placeholder="  search for a name or house"
-        />
-      </div> -->
-      <br />
-
-      <ul id="charactersList"></ul>
+      
+      
+      {% endfor %}
     </div>
-    <br /><br />
-    <!-- Footer -->
-    <footer style="position: relative; bottom: 0; width: 100%">
-      <!-- Copyright -->
-      <br /><br />
-      <div>
-        © 2022 Copyright:
-        <a style="color: rgb(4, 17, 75)" href="{% url 'login' %}"> manopo</a>
+
+
       </div>
-      <div>Current User : {{user}}</div>
-      <!-- Copyright -->
-    </footer>
-    <!-- Footer -->
-    {% endblock content %} {% block scripts %}
-
-    <script>
-      const charactersList = document.getElementById("charactersList");
-      //const searchBar = document.getElementById("searchBar");
-      let hpCharacters = [];
-
-      /* searchBar.addEventListener("keyup", (e) => {
-        const searchString = e.target.value.toLowerCase();
-
-        const filteredCharacters = hpCharacters.filter((character) => {
-          return (
-            character.title.toLowerCase().includes(searchString) ||
-            character.type.toLowerCase().includes(searchString)
-          );
-        });
-        displayCharacters(filteredCharacters);
-      });*/
-
-      const loadCharacters = async () => {
-        try {
-          const res = JSON.parse("{{gdata|escapejs}}");
-
-          hpCharacters = res;
-
-          displayCharacters(hpCharacters);
-        } catch (err) {
-          console.error(err);
-        }
-      };
-
-      const displayCharacters = (characters) => {
-        const htmlString = characters
-          .map((character) => {
-            if (character.type == "ad") {
-              color = "#d8dddd";
-              id = character.id;
-            } else {
-              color = "#d8dddd";
-              id = character.id;
-            }
-
-            const creator =
-              "{{userId}}" == character.created_by_id
-                ? "YOU"
-                : character.created_by_name;
-            console.log(character.verified);
-
-            return `
-            <!-- <ul class="SG">
-              <li class="sgLi">
-                <div class="box">
-                <h3>Style disc</h3>
-                <ul class="df">
-                <li>Friday</li>
-                <li>Monday</li>
-                <li>Saturday</li>
-                <li>Wednesday</li>
-                </ul> 
-              </div>
-             </li> </ul>-->
-              <li style="
-              background-color: ${color};
-              " class="character" onclick = "location.href = {{userId}}== ${character.created_by_id}?'post/update-post/${id}':'chat/home/?u=${character.created_by_id}';">
-                    <h5 style="font-size:150%;">${character.title}</h5>
-                    <span>[${character.type}] </span>
-                    <p> ${character.desc}</p>
-                    created by : <strong>${creator}(${character.location_city})</strong>
-                   
-                    <img src="../media/${character.image}"></img>
-                </li>
-            `;
-          })
-          .join("");
-        charactersList.innerHTML = htmlString;
-      };
-
-      loadCharacters();
-    </script>
-    {% endblock scripts %}
-  </body>
-</html>
+{% endblock content %}
+{% block script %}
+<!-- <script src="{% static 'js/script.js' %}"></script> -->
+<script>
+  (function($) { // Begin jQuery
+    $(function() { // DOM ready
+      // If a link has a dropdown, add sub menu toggle.
+      $('nav ul li a:not(:only-child)').click(function(e) {
+        $(this).siblings('.nav-dropdown').toggle();
+        // Close one dropdown when selecting another
+        $('.nav-dropdown').not($(this).siblings()).hide();
+        e.stopPropagation();
+      });
+      // Clicking away from dropdown will remove the dropdown class
+      $('html').click(function() {
+        $('.nav-dropdown').hide();
+      });
+      // Toggle open and close nav styles on click
+      $('#nav-toggle').click(function() {
+        $('nav ul').slideToggle();
+      });
+      // Hamburger to X toggle
+      $('#nav-toggle').on('click', function() {
+        this.classList.toggle('active');
+      });
+    }); // end DOM ready
+  })(jQuery); // end jQuery
+</script>
+<script src="https://cdn.lordicon.com/lusqsztk.js"></script>
+{% endblock script %}

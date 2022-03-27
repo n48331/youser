@@ -1,27 +1,24 @@
 from django.shortcuts import render, redirect
 
-from json import dumps
 from django.contrib.auth.models import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from .models import *
 from .forms import PostForm
-import django_filters
 # Create your views here.
+from datetime import datetime
 
 
 @login_required(login_url='/login')
 def index(request):
-    user_data = list(User.objects.values())
-    post_data = Post.objects.filter(
+    # posts = Post.objects.all()
+    posts = Post.objects.filter(
         location_city=request.user.profile.city)
-    post_data = list(post_data.values())
-    post_dataJSON = dumps(post_data)
     userId = request.user.id
-
-    userget = request.user.first_name + " " + request.user.last_name
-    return render(request, 'index.html', {'userId': userId, 'gdata': post_dataJSON, 'user': userget, 'user_data': user_data})
+    return render(request, 'index.html',
+                  {'userId': userId,
+                   'posts': posts})
 
 
 @login_required(login_url='/login')
@@ -32,7 +29,6 @@ def CreatePost(request):
             form = PostForm(request.POST, request.FILES)
             if form.is_valid():
                 form.instance.created_by = request.user
-                form.instance.created_by_name = request.user.first_name + " " + request.user.last_name
                 form.instance.location_city = request.user.profile.city
                 form.save()
                 return redirect('/youser/')

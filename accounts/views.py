@@ -11,7 +11,7 @@ from .models import Profile, City
 
 
 def login(request):
-    if request.method == 'POST':
+    if request.method == 'POST' and "login_form":
         username = request.POST['username']
         password = request.POST['password']
 
@@ -30,8 +30,21 @@ def login(request):
             messages.info(request, 'invalid credentials')
             return redirect('login')
 
+    elif request.method == 'POST' and 'signup_form':
+        if request.method == 'POST':
+            form = SignUpForm(request.POST)
+            if form.is_valid():
+                form.save()
+                username = form.cleaned_data.get('username')
+                return redirect('/')
+        else:
+            messages.info(request, 'invalid credentials')
+            return redirect('signup')
+
     else:
-        return render(request, 'login.html')
+        form = SignUpForm()
+        # return render(request, 'login2.html')
+    return render(request, 'login.html', {'form': form})
 
 
 def signup(request):
@@ -43,11 +56,11 @@ def signup(request):
             return redirect('/')
         else:
             messages.info(request, 'invalid credentials')
-            return redirect('signup')
+            return redirect('login')
 
     else:
         form = SignUpForm()
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'login.html', {'form': form})
 
 
 @login_required

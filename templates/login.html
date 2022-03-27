@@ -1,183 +1,153 @@
 {% extends 'base.html' %} {% load static %}
-<title>Monopo SignUp</title>
+
+<title>Document</title>
 {% block css %}
 <meta charset="UTF-8" />
-<link rel="icon" href="{% static 'images/Earth2.jpg' %}" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  href="https://fonts.googleapis.com/css?family=Montserrat:300, 400, 500"
+  rel="stylesheet"
+/>
+<link rel="stylesheet" href="{% static 'css/login.css' %}" />
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+/>
 
-<style>
-  @import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
-  * {
-    margin: 0;
-    padding: 0;
-    /* user-select: none; */
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-  }
-  html,
-  body {
-    height: 100%;
-  }
-  body {
-    display: grid;
-    place-items: center;
-    background: #dde1e7;
-    text-align: center;
-  }
-  .content {
-    width: 330px;
-    padding: 40px 30px;
-    background: #dde1e7;
-    border-radius: 10px;
-    box-shadow: -3px -3px 7px #ffffff73, 2px 2px 5px rgba(94, 104, 121, 0.288);
-  }
-  .content .text {
-    font-size: 33px;
-    font-weight: 600;
-    margin-bottom: 35px;
-    color: #595959;
-  }
-  .field {
-    height: 50px;
-    width: 100%;
-    display: flex;
-    position: relative;
-  }
-  .field:nth-child(2) {
-    margin-top: 20px;
-  }
-  .field input {
-    height: 100%;
-    width: 100%;
-    padding-left: 45px;
-    outline: none;
-    border: none;
-    font-size: 18px;
-    background: #dde1e7;
-    color: #595959;
-    border-radius: 25px;
-    box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff73;
-  }
-  .field input:focus {
-    box-shadow: inset 1px 1px 2px #babecc, inset -1px -1px 2px #ffffff73;
-  }
-  .field span {
-    position: absolute;
-    color: #595959;
-    width: 50px;
-    line-height: 50px;
-  }
-  .field label {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 45px;
-    pointer-events: none;
-    color: #666666;
-  }
-  .field input:valid ~ label {
-    opacity: 0;
-  }
-  .forgot-pass {
-    text-align: left;
-    margin: 10px 0 10px 5px;
-  }
-  .forgot-pass a {
-    font-size: 16px;
-    color: #3498db;
-    text-decoration: none;
-  }
-  .forgot-pass:hover a {
-    text-decoration: underline;
-  }
-  button {
-    margin: 15px 0;
-    width: 100%;
-    height: 50px;
-    font-size: 18px;
-    line-height: 50px;
-    font-weight: 600;
-    background: #dde1e7;
-    border-radius: 25px;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    color: #595959;
-    box-shadow: 2px 2px 5px #babecc, -5px -5px 10px #ffffff73;
-  }
-  button:focus {
-    color: #3498db;
-    box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff73;
-  }
-  .sign-up {
-    margin: 10px 0;
-    color: #595959;
-    font-size: 16px;
-  }
-  .sign-up a {
-    color: #3498db;
-    text-decoration: none;
-  }
-  .sign-up a:hover {
-    text-decoration: underline;
-  }
-</style>
-<style>
-  .neu {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 6rem;
-    margin-right: 1%;
-    width: 100%;
-    margin-top: 10px;
-    font-weight: bolder;
-    text-align: center;
-    color: #eeeeee;
-    text-shadow: 5px 5px 8px #00000027, -5px -5px 8px #ffffff;
-  }
-</style>
+<link
+  rel="stylesheet"
+  id="xo-google-fonts-css"
+  href="http://fonts.googleapis.com/css?family=Montserrat%3A400italic%2C400#038;ver=cc0ca1022224db4641d9750cd65dfefc"
+  type="text/css"
+  media="all"
+/>
 {% endblock css %} {% block content %}
-<div class="neu">YouSer</div>
+<div class="container" id="container">
+  <div class="container-2">
+    <div class="wrapper-login" id="myDIV">
+      <div class="form-container sign-in-container">
+        <form action="login" method="post">
+          {% csrf_token %}
+          <div>
+            <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+            <lottie-player
+              src="https://assets8.lottiefiles.com/packages/lf20_2nfmti0q.json"
+              background="transparent"
+              speed="1"
+              style="width: 120px; height: 120px"
+              loop
+              autoplay
+            ></lottie-player>
+          </div>
 
-<div class="content">
-  <div class="text">Login</div>
-  <form method="post" action="login">
-    {% csrf_token %}
-	<div class="field">
-		<input type="text" name="username" required>
-		<span class="fas fa-user"></span>
-		<label>Username</label>
-	  </div><br>
-    <br />
+          <h1>Log in</h1>
+          <br />
 
-    <div class="field">
-		<input type="password" name="password" required>
-		<span class="fas fa-lock"></span>
-		<label>Password</label>
+          <input type="text" placeholder="username" name="username" />
+
+          <div class="Icon-inside">
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              value=""
+              id="myInput"
+            />
+            <i class="uil uil-eye" onclick="myFunction3()"></i>
+          </div>
+          <a href="">Forgot your password?</a>
+
+          <button name="login_form">Log In</button>
+        </form>
+      </div>
     </div>
-    <br />
+    <div class="wrapper-signIn" id="myDIV1">
+      <div class="form-container sign-in-container">
+        <form action="signup" method="post">
+          {% csrf_token %}
+          <h1>Create Account</h1>
 
+          <!--  -->
+          {{ form.username }}
+          <!--  -->
+          {{ form.email }}
+          <!--  -->
+          {{ form.first_name}}
+          <!--  -->
+          {{form.last_name }}
 
+          <div class="Icon-inside">
+            {{ form.password1 }} {{ form.password2 }}
+            <i class="uil uil-eye" onclick="myFunction4()"></i>
+          </div>
 
-    <button>Login</button>
-    <div class="sign-up">
-		Not a member?
-		<a href="{% url 'signup' %}">signup now</a>
+          <button name="signup_form">Sign Up</button>
+        </form>
+      </div>
     </div>
-  </form>
-  <div>
-	{% for message in messages %}
-	<h3> {{message}}  </h3>
-	{% endfor %}
-	
+  </div>
+
+  <div class="overlay-container">
+    <div class="overlay">
+      <div class="" container-3>
+        <div class="right-sign" id="r1">
+          <div class="overlay-panel overlay-right">
+            {% if messages %} {% for message in messages %}
+            <h1>{{message}}</h1>
+            <p>Wrong Password or username</p>
+            {% endfor %} {% else %}
+            <h1>Hello, Friend!</h1>
+            <p>Enter your personal details and start journey with us</p>
+            {% endif %}
+            <button class="ghost" onclick="myFunction1()">Sign Up</button>
+            <div class="logo">
+              <a href="page.html"
+                ><img
+                  src="{% static 'images/logo.png' %}"
+                  alt="youser"
+                  width="128px"
+              /></a>
+            </div>
+          </div>
+        </div>
+        <div class="right-log" id="r2">
+          <div class="overlay-panel overlay-right">
+            {% if messages %} {% for message in messages %}
+            <h1>{{message}}</h1>
+            <p>Enter details Properly</p>
+            {% endfor %} {% else %}
+            <h1>Welcome Back!</h1>
+            <p>
+              To keep connected with us please login with your personal info
+            </p>
+            {% endif %}
+            <button class="ghost" onclick="myFunction2()">login</button>
+            <div class="logo">
+              <a href="page.html"
+                ><img
+                  src="{% static 'images/logo.png' %}"
+                  alt="youser"
+                  width="128px"
+              /></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-</div>
-
-
-</div>
-			
-<!-- Copyright -->
-
-</footer>
-{% endblock %} {% block scripts %}{% endblock scripts %}
-
+<footer></footer>
+{% endblock content %} {% block scripts %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="{% static 'js/login.js' %}"></script>
+{% endblock scripts %}

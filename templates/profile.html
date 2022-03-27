@@ -1,40 +1,37 @@
-{% extends "base.html" %} {% load crispy_forms_tags %} {% load materializecss %}
-{% load static %} {% block css %}
+{% extends 'base.html' %}
+<!--  -->
+{% load widget_tweaks %}
+<!--  -->
+{% load static %}
+<!--  -->
+{% static "images" as BaseUrl %}
+<!--  -->
+{% block css %}
 <meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="icon" href="{% static 'images/Earth2.jpg' %}" />
-<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<link rel="stylesheet" href="{% static 'css/profile.css' %}" />
 <link
-  href="https://fonts.googleapis.com/icon?family=Material+Icons"
   rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 />
 
 <link
   rel="stylesheet"
-  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-  crossorigin="anonymous"
+  href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
 />
-<link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}" />
-{% endblock css %} {% block title %} {% endblock title %} {% block content %}
-
-<div class="container">
-  <div class="content-section">
-    <div>
-      {% for message in messages %}
-      <h3>{{message}}</h3>
-      {% endfor %}
+{% endblock css %}
+<!--  -->
+{% block content %}
+<div class="container" id="container">
+  <div class="picture">
+    <div class="dp-img">
+      <img src="{{ user.profile.image.url }}" />
     </div>
-    <div class="media">
-      <img
-        class="rounded-circle account-img"
-        src="{{ user.profile.image.url }}"
-      />
-      <div class="media-body">
-        <h2 class="account-heading">{{ user.username }}</h2>
-        <p class="text-secondary">{{ user.email }}</p>
-      </div>
-    </div>
+    <button class="ghost">UPLOAD NEW IMAGE</button>
+    {% render_field p_form.image type="file" class="ghost upload" %}
+  </div>
+  <div class="info">
     <form
       method="POST"
       enctype="multipart/form-data"
@@ -43,32 +40,80 @@
     >
       {% csrf_token %}
 
-      <table>
-        {{ u_form.as_table }} {{ p_form.as_table }}
-      </table>
-      <!-- <fieldset class="form-group">
-        <legend class="border-bottom mb-4">Profile Info</legend>
-        {{ u_form|crispy }}
-         {{ p_form|materializecss }}
-      </fieldset> -->
-      <div class="form-group">
-        <button class="btn btn-outline-info" type="submit">Update</button>
-        <a href="{% url 'logout' %}"
-          ><span
-            style="background-color: coral; color: black"
-            class="btn btn-outline-info"
-            type="submit"
-            >Log Out</span
-          ></a
-        >
-        <a href="{% url 'index' %}"
-          ><span
-            style="background-color: coral; color: black"
-            class="btn btn-outline-info"
-            type="submit"
-            >Home</span
-          ></a
-        >
+      <!-- ============================= -->
+      <div>
+        <h2>USER NAME</h2>
+        <div class="Icon-inside">
+          <div>
+            {% render_field u_form.username type="text" %}
+            <i class="uil uil-pen"></i>
+          </div>
+          <hr />
+        </div>
+      </div>
+      <!-- ============================= -->
+      <div>
+        <h2>E MAIL</h2>
+        <div class="Icon-inside">
+          <div>
+            {% render_field u_form.email type="email" %}
+
+            <i class="uil uil-pen"></i>
+          </div>
+          <hr />
+        </div>
+      </div>
+      <!-- ============================= -->
+      <div>
+        <h2>FIRST NAME</h2>
+        <div class="Icon-inside">
+          <div>
+            {% render_field u_form.first_name type="text" %}
+
+            <i class="uil uil-pen"></i>
+          </div>
+          <hr />
+        </div>
+      </div>
+      <!-- ============================= -->
+      <div>
+        <h2>LAST NAME</h2>
+        <div class="Icon-inside">
+          <div>
+            <!--  -->
+            {% render_field u_form.last_name type="text" %}
+
+            <i class="uil uil-pen"></i>
+          </div>
+          <hr />
+        </div>
+      </div>
+      <!-- ============================= -->
+      <div>
+        <h2>STATE</h2>
+        <div class="labeldiv">
+          <label for="cars" class="select1"></label>
+          {% render_field p_form.state|add_class:"drop" %}
+          <!--  -->
+        </div>
+        <hr />
+      </div>
+      <!-- ============================= -->
+      <div>
+        <h2>CITY</h2>
+        <div class="labeldiv">
+          <label for="cars" class="select1"></label>
+          {% render_field p_form.city|add_class:"drop" %}
+        </div>
+        <hr />
+      </div>
+      <!-- ============================= -->
+      <div class="info-btns">
+        <button class="info-btn" type="submit">save</button>
+
+        <button class="info-btn" onclick="location.href='{% url 'logout' %}'">
+          log out
+        </button>
       </div>
     </form>
   </div>
@@ -100,4 +145,4 @@
     });
   });
 </script>
-4 {% endblock scripts %}
+{% endblock scripts %}
