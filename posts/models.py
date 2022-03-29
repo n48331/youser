@@ -14,7 +14,7 @@ POST_TYPE = (
 class Post(models.Model):
     title = models.CharField(max_length=255)
     image = models.ImageField(upload_to="pics/docs/",
-                              default="pics/default.jpg")
+                              default="pics/default_post.jpg")
     type = models.CharField(max_length=6, choices=POST_TYPE, default='ad')
     desc = models.TextField(blank=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)

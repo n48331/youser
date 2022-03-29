@@ -21,7 +21,7 @@ class City(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(default='pics/default.jpg',
+    image = models.ImageField(default='pics/default_profile.jpg',
                               upload_to='pics/profile_pics')
     state = models.ForeignKey(
         State, on_delete=models.SET_NULL, null=True, blank=True)

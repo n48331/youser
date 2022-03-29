@@ -37,7 +37,11 @@
               href="{% url 'chat-home' %}?u={{u.id}}"
             >
               <div>
-                <p>{{u.first_name}} {{u.last_name}} ({{u.username}})</p>
+                <p>
+                  {{u.first_name}} {{u.last_name}} {% if u.profile.verified %}
+                  <i class="uis uis-check-circle" style="color: #66299b"></i>
+                  {% else %} {% endif %}
+                </p>
               </div>
             </a>
 

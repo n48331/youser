@@ -16,7 +16,11 @@
   integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
   crossorigin="anonymous"
 />
-    
+<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+<link
+rel="stylesheet"
+href="https://unicons.iconscout.com/release/v4.0.0/css/solid.css"
+/>
     {% endblock css %}
     <!--  -->
     {% block content %}
@@ -47,7 +51,7 @@
               >
             </li>
             <li>
-              <a href="#!">Home</a>
+              <a href="#">Home</a>
             </li>
             <li>
               <a href="{% url 'chat-home' %}">Chat</a>
@@ -60,7 +64,9 @@
              
             </li>
             <li>
-              <a href="{% url 'profile' %}"><i class="fa fa-user"></i>&nbsp;&nbsp;{{user.get_full_name}}</a>
+              <a href="{% url 'profile' %}">
+                <i class="uil uil-user-circle"></i>
+                &nbsp;&nbsp;{{user.get_full_name}}</a>
             </li>
           </ul>
         </nav>
@@ -91,8 +97,11 @@
         <span class="owner">
           <b style="font-size:15px; " >
             {{post.created_by.get_full_name}}
+            {% if post.created_by.profile.verified %}
+                  <i class="uis uis-check-circle" style="color: #66299b"></i>
+                  {% else %} {% endif %}
           </b><br>
-          <span class="date" style="font-size:13px; color: red; ">{{post.updated_at|date:"M d, Y" }}</span
+          <span class="date" style="font-size:13px; color: red; ">{{post.updated_at|date:"M d, Y" }}</span>
           </span>
           
           <div class="button">

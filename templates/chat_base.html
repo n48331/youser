@@ -12,8 +12,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chat App using Django</title>
-
+    <title>YouSer</title>
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{% static 'images/logo-app.ico' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.0/css/solid.css"
+    />
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
 
     <link
@@ -27,10 +35,6 @@
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/script.js' %}"></script>
     <script src="{% static 'js/bg.json' %}"></script>
-    <script
-      src="https://kit.fontawesome.com/a076d05399.js"
-      crossorigin="anonymous"
-    ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     {% block header %} {% endblock header %}
   </head>
@@ -49,7 +53,7 @@
       <div class="nav-container">
         <div class="brand" style="padding-right: 200px">
           <form action="">
-            <img src="{% static 'images\logo2.png' %}" width="15%" style="" />
+            <img src="{% static 'images\logo2.png' %}" width="15%" />
             <select class="select" name="city" id="">
               <option value="" disabled selected hidden>select location</option>
               {% for city in cities %}
