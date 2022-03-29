@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+
 * {
   box-sizing: border-box;
 }
@@ -8,6 +10,7 @@ body {
   align-items: center;
   flex-direction: column;
   font-family: "Montserrat", sans-serif;
+
   height: 100vh;
   margin: 10px 0 20px;
 }
@@ -117,7 +120,7 @@ button:focus {
 
 .upload {
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   font-size: 12px;
 
   transition: transform 80ms ease-in;

@@ -1,5 +1,8 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+
 body,html {
-    font-family: "Archivo Black", sans-serif;
+  font-family: "Montserrat", sans-serif;
+
     /* background-color: #10f5c3; */
     margin: 0;
     background-color: #d8dddd;
