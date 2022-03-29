@@ -4,7 +4,7 @@
   <style>
     html,
     body {
-      height: 100%;
+      height: 10%;
       width: 100%;
     }
   </style>
@@ -15,72 +15,77 @@
     <title>Chat App using Django</title>
 
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+
     <link
       rel="stylesheet"
       href="{% static 'fontawesome-free/css/all.min.css' %}"
     />
-    <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
+
+    <link rel="stylesheet" href="{% static 'css/chat-home.css' %}" />
     <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/script.js' %}"></script>
-
+    <script src="{% static 'js/bg.json' %}"></script>
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     {% block header %} {% endblock header %}
   </head>
 
-  <body class="bg-dark text-light">
-    <nav
-      class="navbar navbar-expand-lg navbar-dark bg-primary w-100 border-bottom border-primary mb-2"
-      id="top-nav"
-    >
-      <a class="navbar-brand" href="{% url 'chat-home' %}">Chat App</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#nav-menu"
-        aria-controls="nav-menu"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  <body>
+    <div class="page-bg"></div>
 
-      <div class="collapse navbar-collapse" id="nav-menu">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item {% if page == 'home' %} active {% endif %}">
-            <a class="nav-link" href="{% url 'chat-home' %}"
-              ><i class="fa fa-home"></i> Home</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'logout' %}"
-              ><i class="fa fa-sign-out-alt"></i> Logout</a
-            >
-          </li>
+    <div class="animation-wrapper">
+      <div class="particle particle-1"></div>
+      <div class="particle particle-2"></div>
+      <div class="particle particle-3"></div>
+      <div class="particle particle-4"></div>
+    </div>
+
+    <section class="navigation">
+      <div class="nav-container">
+        <div class="brand" style="padding-right: 200px">
           <form action="">
-            {% csrf_token %}
-            <select name="city" id="">
-              <option value="" disabled selected hidden>
-                Now selected {{user.profile.filter_city_id}}
-              </option>
+            <img src="{% static 'images\logo2.png' %}" width="15%" style="" />
+            <select class="select" name="city" id="">
+              <option value="" disabled selected hidden>select location</option>
               {% for city in cities %}
               <option value="{{city.id}}">{{city}}</option>
               {% endfor %}
             </select>
 
-            <input type="submit" value="Search" />
+            <input class="inpt" type="submit" value="Search" />
           </form>
-        </ul>
-        {% if user.is_authenticated %}
-        <span
-          ><a class="text-light" href="{% url 'profile' %}"
-            ><i class="fa fa-user"></i> <b>Welcome {{user.first_name}}!</b></a
-          ></span
-        >
-        {% endif %}
+        </div>
+        <nav>
+          <div class="nav-mobile">
+            <a id="nav-toggle" href="#!"><span></span></a>
+          </div>
+          <ul class="nav-list {% if page == 'home' %} active {% endif %}">
+            <li>
+              <a href="#!"
+                ><i class="fas fa-map-marker-alt"></i
+                >&nbsp;&nbsp;{{user.profile.filter_city_id}}</a
+              >
+            </li>
+            <li>
+              <a href="{% url 'index' %}">Home</a>
+            </li>
+
+            <li>
+              <a href="#!">About</a>
+            </li>
+            <li>
+              <a href="{% url 'profile' %}">{{user.get_full_name}}</a>
+            </li>
+          </ul>
+        </nav>
       </div>
-    </nav>
+    </section>
+
     <div class="container h-100">{% block content %}{% endblock content %}</div>
   </body>
   <script>

@@ -63,7 +63,7 @@ def signup(request):
     return render(request, 'login.html', {'form': form})
 
 
-@login_required
+@login_required(login_url='/account/')
 def profile(request):
     Profile.objects.get_or_create(user=request.user)
     if request.method == 'POST':

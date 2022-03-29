@@ -19,9 +19,7 @@ body,html {
     font-size: 0;
     line-height: 1.5;
     top: 0;
-    /* left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%); */
+    
 
   }
   
@@ -75,10 +73,7 @@ body,html {
 * {
     box-sizing: border-box;
 }
-/* h1 {
-    color: #E84A5F;
-    margin-bottom: 30px;
-} */
+
 
 
 

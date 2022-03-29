@@ -1,7 +1,7 @@
 {% extends 'chat_base.html' %} {% load static %} {% block header %}
 <style>
   #user-list a.bg-dark {
-    background-color: rgb(107, 107, 107) !important;
+    background-color: #ffffff !important;
   }
 
   .list-group-item {
@@ -24,26 +24,23 @@
   }
 </style>
 {% endblock %} {% block content %}
-<div class="container" style="height: 75%">
+<div class="container" style="height: 600px; width: 150rem">
   <div class="card bg-dark h-100 border-light">
     <div class="card-body h-100">
       <div class="row h-100">
         <div class="col-md-4 border-right h-100">
           <div class="list-group bg-dark" id="user-list">
-            {% for u in users %}
-            <!--  -->
-            {% if not u.id == user.id %}
+            {% for u in users %} {% if not u.id == user.id %}
             <a
+              style="text-decoration: none"
               class="list-group-item {% if u.id != chat_id %}bg-dark{% else %}bg-primary{% endif %} text-white"
               href="{% url 'chat-home' %}?u={{u.id}}"
             >
               <div>
-                <p>
-                  {{u.first_name}} {{u.last_name}} ID:({{u.id}})
-                  [{{u.profile.city}}]
-                </p>
+                <p>{{u.first_name}} {{u.last_name}} ({{u.username}})</p>
               </div>
             </a>
+
             {% endif %} {% endfor %}
           </div>
         </div>
@@ -52,7 +49,7 @@
           <div
             class="h-100 d-flex flex-column justify-content-center align-items-center"
           >
-            <h3>Start Chat now</h3>
+            <h3 style="color: #b452d0">Start Chat now</h3>
             <p>
               <small class="text-muted"
                 >Please select a person to chat with.</small
@@ -63,6 +60,10 @@
           <div id="chat-box-field" class="h-100">
             <div class="chat-box" style="height: 80%">
               {% for chat in chats %} {% if chat.user_from == user %}
+              <div style="color: black">
+                {{chat.user_to.get_full_name}} - {{chat.user_to.profile.city}}
+              </div>
+              <hr color="white" />
               <div class="p-2 w-100 d-flex justify-content-end">
                 <div
                   class="chat-bubble ml-2 mb-2 bg-primary text-light rounded"
@@ -83,7 +84,7 @@
                 >
                   <p>{{chat.message}}</p>
                   <div class="d-flex justify-content-between">
-                    <small>Sender</small>
+                    <small>{{chat.user_from.get_full_name}}</small>
                     <small>{{chat.date_created|date:"M-d-Y H:i"}}</small>
                   </div>
                 </div>
@@ -97,16 +98,36 @@
                   <input type="hidden" name="user_to" value="{{ chat_id }}" />
                   <div class="col-md-10 h-100">
                     <textarea
+                      style="
+                        width: 500px;
+                        height: 60px;
+                        padding: 20px;
+                        border-radius: 90px;
+                      "
                       name="message"
                       id=""
-                      class="h-100 w-100 form-control"
+                      class="form-control"
                       placeholder="Write your message here"
                     ></textarea>
                   </div>
-                  <button
-                    class="button btn btn-primary h-100 w-100 justify-content-center align-items-center d-flex"
-                  >
-                    SEND
+                  <button>
+                    <div class="svg-wrapper-1">
+                      <div class="svg-wrapper">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          width="27"
+                          height="28"
+                        >
+                          <path fill="none" d="M0 0h24v24H0z"></path>
+                          <path
+                            fill="currentColor"
+                            d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+                          ></path>
+                        </svg>
+                      </div>
+                    </div>
+                    <span>Send</span>
                   </button>
                 </form>
               </div>

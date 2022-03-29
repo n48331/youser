@@ -20,39 +20,44 @@ def search(request):
     return render(request, 'user_list.html', {'filter': user_filter})
 
 
-@login_required
+@login_required(login_url='/account/')
 def home(request):
-    User = get_user_model()
-    city_list = City.objects.all()
-    chats = {}
-    city = request.GET.get("city")
-    selected_city = request.user.profile.filter_city_id
-    if city is not None:
-        users = User.objects.filter(profile__city=city)
-        Profile.objects.filter(filter_city_id=request.user.profile.filter_city_id).update(
-            filter_city_id=city)
-    else:
-        users = User.objects.filter(profile__city=selected_city)
+    if request.user.profile.city is not None and request.user.last_name is not '':
+        User = get_user_model()
+        city_list = City.objects.all()
+        chats = {}
+        city = request.GET.get("city")
+        selected_city = request.user.profile.filter_city_id
+        if city is not None:
+            users = User.objects.filter(profile__city=city)
+            Profile.objects.filter(filter_city_id=request.user.profile.filter_city_id).update(
+                filter_city_id=city)
+        else:
+            users = User.objects.filter(profile__city=selected_city)
 
-    user_filter = UserFilter(request.GET, queryset=users)
-    print(city)
-    if request.method == 'GET' and 'u' in request.GET:
-        # chats = chatMessages.objects.filter(Q(user_from=request.user.id & user_to=request.GET['u']) | Q(user_from=request.GET['u'] & user_to=request.user.id))
-        chats = chatMessages.objects.filter(Q(user_from=request.user.id, user_to=request.GET['u']) | Q(
-            user_from=request.GET['u'], user_to=request.user.id))
-        chats = chats.order_by('date_created')
-    context = {
-        "selected_city": selected_city,
-        "cities": city_list,
-        'filter': user_filter,
-        "page": "home",
-        "users": users,
-        "chats": chats,
-        "chat_id": int(request.GET['u'] if request.method == 'GET' and 'u' in request.GET else 0)
-    }
-    print(request.GET['u'] if request.method ==
-          'GET' and 'u' in request.GET else 0)
-    return render(request, "chat_home.html", context)
+        user_filter = UserFilter(request.GET, queryset=users)
+        print(city)
+        if request.method == 'GET' and 'u' in request.GET:
+            # chats = chatMessages.objects.filter(Q(user_from=request.user.id & user_to=request.GET['u']) | Q(user_from=request.GET['u'] & user_to=request.user.id))
+            chats = chatMessages.objects.filter(Q(user_from=request.user.id, user_to=request.GET['u']) | Q(
+                user_from=request.GET['u'], user_to=request.user.id))
+            chats = chats.order_by('date_created')
+        context = {
+            "selected_city": selected_city,
+            "cities": city_list,
+            'filter': user_filter,
+            "page": "home",
+            "users": users,
+            "chats": chats,
+            "chat_id": int(request.GET['u'] if request.method == 'GET' and 'u' in request.GET else 0)
+        }
+        print(request.GET['u'] if request.method ==
+              'GET' and 'u' in request.GET else 0)
+        return render(request, "chat_home.html", context)
+    else:
+        messages.info(
+            request, 'Please Update your location or Name')
+        return redirect("profile")
 
 
 def get_messages(request):

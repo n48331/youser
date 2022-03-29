@@ -13,7 +13,7 @@ body {
 .card {
   max-width: 280px;
   display: grid;
-  grid-template-rows: 14rem 14rem 1fr;
+  grid-template-rows: 14rem 11rem 1fr;
   grid-template-areas:  
   "image"
   "text"
@@ -36,6 +36,16 @@ body {
 
 .card > .card-text {
   grid-area: text;
+  word-wrap: break-word;
+  max-width: 210px;
+  
+  
+
+}
+
+.card > p {
+  word-wrap: break-word;
+  
   
 
 }
