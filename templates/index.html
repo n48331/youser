@@ -68,7 +68,7 @@
     </section>
     <div class="card-container">
     {% for post in posts %}
-
+<!-- loop start here ====================================================-->
     <div class="card">
      
       <div class="card-image"
@@ -89,10 +89,10 @@
       </div>
       <div class="created">
         <span class="owner">
-          <b>
+          <b style="font-size:15px; " >
             {{post.created_by.get_full_name}}
           </b><br>
-          <span class="date" style="color: red;">{{post.updated_at|date:"M d, Y" }}</span
+          <span class="date" style="font-size:13px; color: red; ">{{post.updated_at|date:"M d, Y" }}</span
           </span>
           
           <div class="button">
