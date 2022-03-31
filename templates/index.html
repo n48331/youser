@@ -42,10 +42,10 @@ href="https://unicons.iconscout.com/release/v4.0.0/css/solid.css"
           <img src="{% static 'images\logo2.png' %}" width="15%" >
         </div>
         <nav>
-          <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
+          <div class="nav-mobile"><a id="nav-toggle" href="{% url 'index' %}"><span></span></a></div>
           <ul class="nav-list">
             <li>
-              <a href="#!"
+              <a title="update location in your profile" href="{% url 'profile' %}"
                 ><i class="fas fa-map-marker-alt"></i
                 >&nbsp;&nbsp;{{user.profile.city}}</a
               >

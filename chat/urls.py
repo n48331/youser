@@ -9,4 +9,5 @@ urlpatterns = [
     path('home/', views.home, name='chat-home'),
     path('send/', views.send_chat, name='chat-send'),
     path('renew/', views.get_messages, name='chat-renew'),
+    path('read-chat/<int:pk>/', views.read, name='chat-delete'),
 ]

@@ -79,7 +79,9 @@
         <h2>USER NAME</h2>
         <div class="Icon-inside">
           <div>
-            {% render_field u_form.username type="text" %}
+            <!--  -->
+            {% render_field u_form.username %}
+            <!--  -->
             <i class="uil uil-pen"></i>
           </div>
           <hr />
@@ -102,9 +104,17 @@
         <h2>FIRST NAME</h2>
         <div class="Icon-inside">
           <div>
-            {% render_field u_form.first_name type="text" %}
+            {% if user.profile.verified %}
+            <!--  -->
+            {% render_field u_form.first_name|append_attr:"readonly:readonly" %}
 
+            <i class="uis uis-check-circle" style="color: #66299b"></i>
+            {% else %}
+            <!--  -->
+            {% render_field u_form.first_name %}
+            <!--  -->
             <i class="uil uil-pen"></i>
+            {% endif %}
           </div>
           <hr />
         </div>
@@ -115,9 +125,17 @@
         <div class="Icon-inside">
           <div>
             <!--  -->
-            {% render_field u_form.last_name type="text" %}
+            {% if user.profile.verified %}
+            <!--  -->
+            {% render_field u_form.last_name|append_attr:"readonly:readonly" %}
 
+            <i class="uis uis-check-circle" style="color: #66299b"></i>
+            {% else %}
+            <!--  -->
+            {% render_field u_form.last_name type="text" %}
+            <!--  -->
             <i class="uil uil-pen"></i>
+            {% endif %}
           </div>
           <hr />
         </div>

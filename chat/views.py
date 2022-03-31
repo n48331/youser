@@ -10,6 +10,9 @@ from django.db.models import Q
 import json
 from accounts.models import Profile, City
 from .filters import UserFilter
+from notifications.signals import notify
+from notifications.models import Notification
+
 # Create your views here.
 
 
@@ -22,6 +25,7 @@ def search(request):
 
 @login_required(login_url='/account/')
 def home(request):
+
     if request.user.profile.city is not None and request.user.last_name is not '':
         User = get_user_model()
         city_list = City.objects.all()
@@ -61,6 +65,7 @@ def home(request):
 
 
 def get_messages(request):
+
     chats = chatMessages.objects.filter(Q(id__gt=request.POST['last_id']), Q(
         user_from=request.user.id, user_to=request.POST['chat_id']) | Q(user_from=request.POST['chat_id'], user_to=request.user.id))
     new_msgs = []
@@ -73,6 +78,7 @@ def get_messages(request):
         data['date_created'] = chat.date_created.strftime("%b-%d-%Y %H:%M")
         print(data)
         new_msgs.append(data)
+
     return HttpResponse(json.dumps(new_msgs), content_type="application/json")
 
 
@@ -89,6 +95,8 @@ def send_chat(request):
         try:
             insert.save()
             resp['status'] = 'success'
+            notify.send(
+                u_from, recipient=u_to, verb='Message', description=post['message'])
         except Exception as ex:
             resp['status'] = 'failed'
             resp['mesg'] = ex
@@ -96,3 +104,11 @@ def send_chat(request):
         resp['status'] = 'failed'
 
     return HttpResponse(json.dumps(resp), content_type="application/json")
+
+
+def read(request, pk):
+
+    notification = Notification.objects.filter(actor_object_id=pk)
+    notification.mark_all_as_read()
+    print(notification)
+    return redirect(f'/chat/home/?u={pk}')
