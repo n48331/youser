@@ -22,6 +22,9 @@
     overflow: auto;
     max-width: 100%;
   }
+
+
+
 </style>
 {% endblock %} {% block content %}
 <div class="container" style="height: 600px; width: 150rem">
@@ -32,12 +35,24 @@
           <div class="list-group bg-dark" id="user-list">
             {% for u in users %} {% if not u.id == user.id %}
             <a
-              style="text-decoration: none"
+              style="
+              text-decoration: none;
+              max-height: 83px;
+              
+              "
               class="list-group-item {% if u.id != chat_id %}bg-dark{% else %}bg-primary{% endif %} text-white"
               href="{% url 'chat-home' %}?u={{u.id}}"
             >
               <div>
                 <p class="chat-name">
+                  <img
+                  style="
+                  max-width: 55px;
+                  border-radius: 50%;
+                  margin-left: -10px;
+                  max-height: 55px;
+                  "
+                  src="/media/{{u.profile.image}}" alt="">
                   {{u.first_name}} {{u.last_name}} {% if u.profile.verified %}
                   <i class="uis uis-check-circle" style="color: #000000"></i>
                   {% else %} {% endif %}
