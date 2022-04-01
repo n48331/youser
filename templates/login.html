@@ -122,8 +122,11 @@
         <div class="right-log" id="r2">
           <div class="overlay-panel overlay-right">
             {% if messages %} {% for message in messages %}
-            <h1>{{message}}</h1>
-            <p>Enter details Properly</p>
+            <h4>{{message}}</h4>
+            Your password can’t be too similar to your other personal information.,<br>
+    Your password must contain at least 8 characters.<br>
+    Your password can’t be a commonly used password.<br>
+    Your password can’t be entirely numeric.<br>
             {% endfor %} {% else %}
             <h1>Welcome Back!</h1>
             <p>
