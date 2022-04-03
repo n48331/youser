@@ -21,11 +21,6 @@
 rel="stylesheet"
 href="https://unicons.iconscout.com/release/v4.0.0/css/solid.css"
 />
-<style>
-  a{
-    text-decoration: none;
-  }
-</style>
     {% endblock css %}
     <!--  -->
     {% block content %}
@@ -60,13 +55,13 @@ href="https://unicons.iconscout.com/release/v4.0.0/css/solid.css"
             </li>
             <li>
               <a href="{% url 'chat-home' %}">Chat</a>
-              
+
             </li>
-           
-            
+
+
             <li>
-              <a href="#">About</a>
-             
+              <a href="https://youserapp.github.io/">About</a>
+
             </li>
             <li>
               <a href="{% url 'profile' %}">
@@ -81,49 +76,51 @@ href="https://unicons.iconscout.com/release/v4.0.0/css/solid.css"
     {% for post in posts %}
 <!-- loop start here ====================================================-->
     <div class="card">
-     
+
       <div class="card-image"
       style="background: url('../media/{{post.image}}');"
       ></div>
       <div class="card-text">
-        
-        <h2>{{post.title}}</h2>
-        
+
+        <h4>{{post.title}}</h4>
+
         <div class="badge">
           {{post.type}}
         </div>
-      
+
         <p>{{post.desc}}</p>
-        
-        
-        
+
+
+
       </div>
       <div class="created">
         <span class="owner">
           <b style="font-size:15px; " >
             {{post.created_by.get_full_name}}
-            {% if post.created_by.profile.verified %}
+            {% if post.created_by.is_superuser %}
+                  <i class="uis uis-check-circle" style="color: #00dd11"></i>
+                  {% elif post.created_by.profile.verified %}
                   <i class="uis uis-check-circle" style="color: #66299b"></i>
                   {% else %} {% endif %}
           </b><br>
           <span class="date" style="font-size:13px; color: red; ">{{post.updated_at|date:"M d, Y" }}</span>
           </span>
-          
+
           <div class="button">
             {% if userId == post.created_by.id %}
             <button class="usercontact"onclick ="location.href = 'post/update-post/{{post.id}}';"> EDIT
-              
+
               {% else %}
-              <button class="usercontact"onclick ="location.href = 'chat/home/?u={{post.created_by_id}}';"> CONTACT     
+              <button class="usercontact"onclick ="location.href = 'chat/home/?u={{post.created_by_id}}';"> CONTACT
                 {% endif %}
-                
+
               </button>
             </div>
           </div>
       </div>
 
-      
-      
+
+
       {% endfor %}
     </div>
 

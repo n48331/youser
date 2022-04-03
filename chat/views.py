@@ -109,6 +109,5 @@ def send_chat(request):
 def read(request, pk):
 
     notification = Notification.objects.filter(actor_object_id=pk)
-    notification.mark_all_as_read()
-    print(notification)
+    notification.mark_all_as_deleted()
     return redirect(f'/chat/home/?u={pk}')
